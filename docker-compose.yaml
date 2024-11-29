@@ -1,8 +1,10 @@
 services:
   localstack:
-    image: localstack/localstack
+    image: localstack/localstack:latest
+    platform: ${DOCKER_PLATFORM:-linux/amd64}
     ports:
-      - "4566-4599:4566-4599"
+      - "127.0.0.1:4566:4566"
+      - "127.0.0.1:4510-4559:4510-4559"
     configs:
       - source: aws_profile
         target: /root/.aws
@@ -12,7 +14,9 @@ services:
       - DOCKER_HOST=unix:///var/run/docker.sock
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-        
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
 configs:
   aws_profile:
-    file: ./aws_profile
+    file: ./localstack/profile
