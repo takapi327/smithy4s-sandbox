@@ -1,0 +1,18 @@
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4566-4599:4566-4599"
+    configs:
+      - source: aws_profile
+        target: /root/.aws
+    environment:
+      - DEFAULT_REGION=ap-northeast-1
+      - LAMBDA_EXECUTOR=docker
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+        
+configs:
+  aws_profile:
+    file: ./aws_profile
