@@ -17,6 +17,19 @@ Resources:
       CodeUri: functions/insert-dynamodb/target/scala-3.5.2/npm-package/
       Handler: index.Handler
       Runtime: nodejs20.x
+      MemorySize: 1024
+      Architectures:
+        - x86_64
+      Policies:
+        DynamoDBCrudPolicy:
+          TableName: !Ref Smithy4sSandboxTable
+  InsertDynamoDBJar:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: functions/insert-dynamodb-jar/target/scala-3.5.2/insert-dynamodb-jar-assembly-0.1.0-SNAPSHOT.jar
+      Handler: Handler::handleRequest
+      Runtime: java11
+      MemorySize: 1024
       Architectures:
         - x86_64
       Policies:

@@ -1,7 +1,11 @@
 import cats.effect.*
+
 import fs2.io.compression.*
+
 import feral.lambda.*
+
 import org.http4s.ember.client.EmberClientBuilder
+
 import smithy4s.aws.*
 import com.amazonaws.dynamodb.*
 
